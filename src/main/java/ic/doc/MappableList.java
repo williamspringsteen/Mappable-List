@@ -38,8 +38,6 @@ class MappableList<T> extends HigherOrderList<T> {
       System.out.print("Error - Interrupted Exception");
     }
     
-    System.out.println("LIST IS AT END " + result);
-    
     return result;
   }
   
