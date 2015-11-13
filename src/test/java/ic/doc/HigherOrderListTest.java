@@ -93,11 +93,17 @@ public class HigherOrderListTest {
       
     };
     
+    List<Integer> squares = new ArrayList<>();
     try {
-      List<Integer> squares = list.doFunction(slowSquare);
+      squares = list.doFunction(slowSquare);
     } catch (Exception e) {
       System.out.println("Exception occured.");
     }
+    
+    ArrayList<Integer> squaredList = new ArrayList<>(
+        Arrays.asList(1, 4, 9, 16));
+    assertThat(((ArrayList<Integer>) squares).toArray(), is(squaredList.toArray()));
+    
   }
   
 }
