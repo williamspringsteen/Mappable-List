@@ -10,7 +10,7 @@ import org.junit.Test;
 public class HigherOrderListTest {
   
   @Test
-  public void doesMappableListMapOverEmptyListAndReturnEmptyList() {
+  public void doesMappableListMapOverEmptyListAndReturnEmptyList() throws Exception {
     ArrayList<String> nonMappableList = new ArrayList<String>();
     MappableList<String> list = new MappableList<String>(nonMappableList);
     
@@ -25,7 +25,7 @@ public class HigherOrderListTest {
   }
   
   @Test
-  public void doesMappableListMapSquareFunctionOverListOfIntegers() {
+  public void doesMappableListMapSquareFunctionOverListOfIntegers() throws Exception {
     ArrayList<Integer> nonMappableList = new ArrayList<Integer>(
         Arrays.asList(1, 2, 3, 4));
     MappableList<Integer> list = new MappableList<Integer>(nonMappableList);
