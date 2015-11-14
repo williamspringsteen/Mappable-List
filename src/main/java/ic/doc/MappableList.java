@@ -23,14 +23,16 @@ class MappableList<T> extends HigherOrderList<T> {
     }
     executor.shutdown();
     
-    while (!areAllFuturesDone(futureList)) {
+    do {
+      for (int n = 0; n < 500; n++) {
       for (int i = 0; i < futureList.size(); i++) {
         Future<T> futureElem = futureList.get(i);
         if (futureElem.isDone() && result.size() == i) {
           result.add(futureElem.get());
         }
       }
-    }
+      }
+    } while (!areAllFuturesDone(futureList));
     
     try {
       executor.awaitTermination(120, TimeUnit.SECONDS);

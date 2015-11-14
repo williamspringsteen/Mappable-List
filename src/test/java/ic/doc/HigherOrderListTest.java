@@ -84,7 +84,7 @@ public class HigherOrderListTest {
       @Override
       public Integer applyTo(Integer elem) {
         try {
-          Thread.sleep(2000);
+          Thread.sleep(1000);
         } catch (InterruptedException e) {
           System.out.println("Error - Interrupt Exception");
         }
