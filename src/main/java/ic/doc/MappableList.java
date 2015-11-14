@@ -14,32 +14,23 @@ class MappableList<T> extends HigherOrderList<T> {
 
   @Override
   public List<T> doFunction(UnaryFunction<T> mapper) throws Exception {
-    List<T> result = new ArrayList<T>();
-    Future<T> future = null;
+    List<T> result = new ArrayList<T>(); Future<T> future = null;
     List<Future<T>> futureList = new ArrayList<>(delegate.size());
     for (T elem : delegate) {
       future = executor.submit(new DoFunctionTask<>(mapper, elem));
       futureList.add(future);
     }
     executor.shutdown();
-    
     do {
-      for (int n = 0; n < 500; n++) {
-      for (int i = 0; i < futureList.size(); i++) {
-        Future<T> futureElem = futureList.get(i);
-        if (futureElem.isDone() && result.size() == i) {
-          result.add(futureElem.get());
+      for (int n = 0; n < 100; n++) {
+        for (int i = 0; i < futureList.size(); i++) {
+          Future<T> futureElem = futureList.get(i);
+          if (futureElem.isDone() && result.size() == i) {
+            result.add(futureElem.get());
+          }
         }
       }
-      }
     } while (!areAllFuturesDone(futureList));
-    
-    try {
-      executor.awaitTermination(120, TimeUnit.SECONDS);
-    } catch (InterruptedException e) {
-      System.out.print("Error - Interrupted Exception");
-    }
-    
     return result;
   }
   

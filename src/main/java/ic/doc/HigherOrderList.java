@@ -11,7 +11,7 @@ public abstract class HigherOrderList<T> extends ArrayList<T> {
     this.delegate = delegate;
   }
   
-  public abstract List<T> doFunction(UnaryFunction<T> function) throws Exception ;
+  public abstract List<T> doFunction(UnaryFunction<T> function) throws Exception;
 
   public abstract T doFunction(BinaryFunction<T> mapper, T initialValue);
   
